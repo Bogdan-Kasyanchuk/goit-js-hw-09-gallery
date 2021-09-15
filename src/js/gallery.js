@@ -1,4 +1,5 @@
 import galleryItems from './app.js'
+
 import {
   gallery,
   lightbox,
@@ -7,19 +8,13 @@ import {
   lightboxOverlay,
 } from './refs.js'
 
-const fnGallery = (array) =>
-  array.map(
-    (element) =>
-      `<li class="gallery__item"><a class="gallery__link" href="${element.original}"><img class="gallery__image" src="${element.preview}" data-source="${element.original}" alt="${element.description}"/></a></li>`,
-  )
+import { fnRender } from './render.js'
 
-gallery.insertAdjacentHTML('beforeend', fnGallery(galleryItems).join(''))
+gallery.insertAdjacentHTML('beforeend', fnRender(galleryItems).join(''))
 
-const fnDelegation = (event) => {
-  fnChange(event.target.dataset.source, event.target.alt)
-}
+import { fnDelegation } from './delegation.js'
 
-const fnChange = (newSrc = '', newAlt = '') => {
+export const fnChange = (newSrc = '', newAlt = '') => {
   lightboxImage.setAttribute('src', newSrc)
   lightboxImage.setAttribute('alt', newAlt)
 }
